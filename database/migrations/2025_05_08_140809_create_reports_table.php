@@ -22,6 +22,7 @@ return new class extends Migration {
             $table->string('longitude');
             $table->string('address');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
