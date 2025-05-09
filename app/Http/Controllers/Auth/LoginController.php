@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreLoginRequest;
 use App\Interfaces\AuthRepositoryInterface;
+use Auth;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -25,11 +26,14 @@ class LoginController extends Controller
         $credentials = $request->validated();
 
         if ($this->authRepository->login($credentials)) {
-            dd('Login Berhasil');
+            if (Auth::user()->hasRole('admin')) {
+                return redirect()->route('admin.dashboard');
+            }
+            ;
         }
         ;
 
-        return redirect()->route('auth.login')->withErrors([
+        return redirect()->route('login')->withErrors([
             'email' => 'Email atau password salah'
         ])->withInput();
     }
