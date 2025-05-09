@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->enum('status', ['delivered', 'in_process', 'completed', 'rejected']);
             $table->longText('description');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
