@@ -37,4 +37,11 @@ class LoginController extends Controller
             'email' => 'Email atau password salah'
         ])->withInput();
     }
+
+    public function logout()
+    {
+        $this->authRepository->logout();
+
+        return redirect()->route('login');
+    }
 }
