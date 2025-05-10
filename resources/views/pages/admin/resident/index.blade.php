@@ -2,7 +2,7 @@
 
 @section('title', 'Data Masyarakat')
 @section('content')
-    <a href="create.html" class="btn btn-primary mb-3">Tambah Data</a>
+    <a href="{{ route('admin.resident.create') }}" class="btn btn-primary mb-3">Tambah Data</a>
 
     <div class="card shadow mb-4">
         <div class="card-header py-3"></div>
