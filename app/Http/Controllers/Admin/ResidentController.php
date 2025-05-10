@@ -77,7 +77,7 @@ class ResidentController extends Controller
     {
         $data = $request->validated();
 
-        if($request->avatar){
+        if ($request->avatar) {
             $data['avatar'] = $request->file('avatar')->store('assets/avatar', 'public');
         }
 
@@ -91,6 +91,8 @@ class ResidentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->residentRepository->deleteResident($id);
+
+        return redirect()->route('admin.resident.index');
     }
 }
