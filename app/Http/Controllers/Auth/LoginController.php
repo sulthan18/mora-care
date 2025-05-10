@@ -29,12 +29,19 @@ class LoginController extends Controller
             if (Auth::user()->hasRole('admin')) {
                 return redirect()->route('admin.dashboard');
             }
-            ;
         }
-        ;
+
+        dd("Login sebagai user berhasil");
 
         return redirect()->route('login')->withErrors([
             'email' => 'Email atau password salah'
         ])->withInput();
+    }
+
+    public function logout()
+    {
+        $this->authRepository->logout();
+
+        return redirect()->route('login');
     }
 }
