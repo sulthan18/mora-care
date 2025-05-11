@@ -8,6 +8,7 @@ use App\Interfaces\ReportCategoryRepositoryInterface;
 use App\Interfaces\ReportRepositoryInterface;
 use App\Interfaces\ResidentRepositoryInterface;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert as Swal;
 
 class ReportController extends Controller
 {
@@ -47,7 +48,16 @@ class ReportController extends Controller
      */
     public function store(StoreReportRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $data['code'] = 'MORALAPOR' . mt_rand(100000, 999999);
+        $data['image'] = $request->file('image')->store('assets/report/image', 'public');
+
+        $this->reportRepository->createReport($data);
+
+        Swal::toast('Data Laporan Berhasil Ditambahkan', 'success')->timerProgressBar();
+
+        return redirect()->route('admin.report.index');
     }
 
     /**
@@ -63,7 +73,11 @@ class ReportController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $report = $this->reportRepository->getReportById($id);
+        $residents = $this->residentRepository->getAllResidents();
+        $categories = $this->reportCategoryRepository->getAllReportCategories();
+
+        return view('pages.admin.report.edit', compact('report', 'residents', 'categories'));
     }
 
     /**
