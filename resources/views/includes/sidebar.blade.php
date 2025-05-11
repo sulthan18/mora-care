@@ -14,20 +14,49 @@
     <!-- Nav Item - Dashboard -->
     <li class="nav-item {{ request()->is('admin/dashboard') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('admin.dashboard') }}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a>
+            <i class="fas fa-fw fa-th-large"></i>
+            <span>Dashboard</span>
+        </a>
     </li>
 
-    <!-- Nav Item - Tables -->
+    <!-- Nav Item - Data Masyarakat -->
     <li class="nav-item {{ request()->is('admin/resident*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('admin.resident.index') }}">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Data Masyarakat</span></a>
+            <i class="fas fa-fw fa-users"></i>
+            <span>Data Masyarakat</span>
+        </a>
     </li>
 
+    {{-- <!-- Nav Item - Data Kategori -->
     <li class="nav-item {{ request()->is('admin/report-category*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('admin.report-category.index') }}">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Data Kategori</span></a>
+            <i class="fas fa-fw fa-tags"></i>
+            <span>Data Kategori</span>
+        </a>
+    </li>
+
+    <!-- Nav Item - Data Laporan -->
+    <li class="nav-item {{ request()->is('admin/report*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.report.index') }}">
+            <i class="fas fa-fw fa-file-alt"></i>
+            <span>Data Laporan</span>
+        </a>
+    </li> --}}
+
+    <!-- Nav Item - Data Kategori -->
+    <li
+        class="nav-item {{ request()->is('admin/report-category') || request()->is('admin/report-category/*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.report-category.index') }}">
+            <i class="fas fa-fw fa-tags"></i>
+            <span>Data Kategori</span>
+        </a>
+    </li>
+
+    <!-- Nav Item - Data Laporan -->
+    <li class="nav-item {{ request()->is('admin/report') || request()->is('admin/report/*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.report.index') }}">
+            <i class="fas fa-fw fa-file-alt"></i>
+            <span>Data Laporan</span>
+        </a>
     </li>
 </ul>
