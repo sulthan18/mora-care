@@ -25,7 +25,7 @@ class Report extends Model
         return $this->belongsTo(Resident::class);
     }
 
-    public function category()
+    public function reportCategory()
     {
         return $this->belongsTo(ReportCategory::class);
     }
