@@ -66,7 +66,9 @@ class ReportController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $report = $this->reportRepository->getReportById($id);
+
+        return view('pages.admin.report.show', compact('report'));
     }
 
     /**
