@@ -58,6 +58,49 @@
             </table>
         </div>
     </div>
+
+    <div class="card shadow mb-5">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Progress Laporan</h6>
+        </div>
+        <div class="card-body">
+            <a href="{{ route('admin.report-status.create') }}" class="btn btn-primary mb-3">Tambah Progress</a>
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Bukti</th>
+                            <th>Status</th>
+                            <th>Deskripsi</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($report->reportStatuses as $status)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>
+                                    <img src="{{ asset('storage/' . $status->image) }}" alt="image" width="100">
+                                </td>
+                                <td>
+                                    <a href="{{ route('admin.report-status.edit', $status->id) }}"
+                                        class="btn btn-warning">Edit</a>
+                                    <a href="{{ route('admin.report.show', $status->id) }}" class="btn btn-info">Show</a>
+                                    <form action="{{ route('admin.report-status.destroy', $status->id) }}" method="POST"
+                                        class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
@@ -82,11 +125,12 @@
         const osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', tileLayerOptions);
 
         // Satellite layer from OpenStreetMap
-        const satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-            attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
-            maxZoom: 19,
-            minZoom: 3
-        });
+        const satelliteLayer = L.tileLayer(
+            'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+                maxZoom: 19,
+                minZoom: 3
+            });
 
         // Add default layer
         osmLayer.addTo(map);
@@ -104,20 +148,21 @@
         // Determine location description based on available information
         const locationDescription = (() => {
             @php
-            $description = '';
-            if (!empty($report->address)) {
-                $description = $report->address;
-            } else {
-                $description = 'Lokasi tidak terperinci';
-            }
+                $description = '';
+                if (!empty($report->address)) {
+                    $description = $report->address;
+                } else {
+                    $description = 'Lokasi tidak terperinci';
+                }
             @endphp
             return '{{ $description }}';
         })();
 
         // Add marker with custom icon
         const marker = L.marker(
-            [{{ $report->latitude }}, {{ $report->longitude }}],
-            { icon: markerIcon }
+            [{{ $report->latitude }}, {{ $report->longitude }}], {
+                icon: markerIcon
+            }
         ).addTo(map);
 
         // Detailed popup with location information
