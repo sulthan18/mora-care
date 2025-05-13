@@ -97,7 +97,6 @@
                                 <td>
                                     <a href="{{ route('admin.report-status.edit', $status->id) }}"
                                         class="btn btn-warning">Edit</a>
-                                    <a href="{{ route('admin.report.show', $status->id) }}" class="btn btn-info">Show</a>
                                     <form action="{{ route('admin.report-status.destroy', $status->id) }}" method="POST"
                                         class="d-inline">
                                         @csrf
