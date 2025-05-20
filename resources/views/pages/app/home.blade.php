@@ -29,28 +29,31 @@
         <div class="d-flex flex-column gap-3 mt-3">
             @foreach ($reports as $report)
                 <div class="card card-report border-0 shadow-none">
-                    <a href="details.html" class="text-decoration-none text-dark">
+                    <a href="{{ route('report.show', $report->code) }}" class="text-decoration-none text-dark">
                         <div class="card-body p-0">
                             <div class="card-report-image position-relative mb-2">
                                 <img src="{{ asset('storage/' . $report->image) }}" alt="">
 
-                                @if ($report->reportStatuses->last()->status === 'delivered')
-                                    <div class="badge-status on-process">
-                                        Terkirim
-                                    </div>
+                                @php
+                                    $latestStatus = $report->reportStatuses->last();
+                                @endphp
+
+                                @if ($latestStatus)
+                                    @switch($latestStatus->status)
+                                        @case('delivered')
+                                            <div class="badge-status on-process">Terkirim</div>
+                                        @break
+
+                                        @case('in_process')
+                                            <div class="badge-status on-process">Diproses</div>
+                                        @break
+
+                                        @case('completed')
+                                            <div class="badge-status done">Selesai</div>
+                                        @break
+                                    @endswitch
                                 @endif
 
-                                @if ($report->reportStatuses->last()->status === 'in_process')
-                                <div class="badge-status on-process">
-                                        Diproses
-                                    </div>
-                                @endif
-
-                                @if ($report->reportStatuses->last()->status === 'completed')
-                                    <div class="badge-status done">
-                                        Selesai
-                                    </div>
-                                @endif
                             </div>
 
                             <div class="d-flex justify-content-between align-items-end mb-2">
