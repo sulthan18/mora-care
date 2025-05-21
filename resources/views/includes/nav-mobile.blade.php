@@ -26,7 +26,7 @@
     </a>
 
     @auth
-        <a href="profile.html">
+        <a href="{{ route('profile') }}">
             <i class="fas fa-user"></i>
             Profil
         </a>

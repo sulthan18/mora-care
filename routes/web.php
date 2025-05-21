@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ReportCategoryController;
@@ -16,6 +17,10 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/reports', [UserReportController::class, 'index'])->name('report.index');
 Route::get('/report/{code}', [UserReportController::class, 'show'])->name('report.show');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+});
 
 // Auth Routes
 Route::get('/login', [LoginController::class, 'index'])->name('login');
