@@ -12,7 +12,9 @@ use App\Http\Controllers\User\ReportController as UserReportController;
 
 // User Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/report/{code}', [UserReportController::class, 'index'])->name('report.show');
+
+Route::get('/reports', [UserReportController::class, 'index'])->name('report.index');
+Route::get('/report/{code}', [UserReportController::class, 'show'])->name('report.show');
 
 // Auth Routes
 Route::get('/login', [LoginController::class, 'index'])->name('login');
