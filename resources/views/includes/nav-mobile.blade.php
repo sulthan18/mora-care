@@ -25,8 +25,15 @@
         Notifikasi
     </a>
 
-    <a href="profile.html">
-        <i class="fas fa-user"></i>
-        Profil
-    </a>
+    @auth
+        <a href="profile.html">
+            <i class="fas fa-user"></i>
+            Profil
+        </a>
+    @else
+        <a href="{{ route('register') }}">
+            <i class="fas fa-right-to-bracket"></i>
+            Daftar
+        </a>
+    @endauth
 </nav>
