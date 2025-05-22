@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\ReportController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ReportCategoryController;
@@ -19,6 +20,12 @@ Route::get('/reports', [UserReportController::class, 'index'])->name('report.ind
 Route::get('/report/{code}', [UserReportController::class, 'show'])->name('report.show');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/take-report', [UserReportController::class, 'take'])->name('report.take');
+    Route::get('/preview', [UserReportController::class, 'preview'])->name('report.preview');
+    Route::get('/create-report', [UserReportController::class, 'create'])->name('report.create');
+    Route::post('/create-report', [UserReportController::class, 'store'])->name('report.store');
+    Route::get('/report-success', [UserReportController::class, 'success'])->name('report.success');
+
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 });
 
