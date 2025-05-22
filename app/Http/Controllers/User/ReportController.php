@@ -30,6 +30,21 @@ class ReportController extends Controller
         return view('pages.app.report.index', compact('reports'));
     }
 
+    public function myReport(Request $request)
+    {
+        $validStatuses = ['delivered', 'in_process', 'completed', 'rejected'];
+
+        $status = $request->status;
+
+        if (!in_array($status, $validStatuses)) {
+            $status = 'delivered';
+        }
+
+        $reports = $this->reportRepository->getReportsByResidentId($status);
+
+        return view('pages.app.report.my-report', compact('reports'));
+    }
+
     public function show($code)
     {
         $report = $this->reportRepository->getReportByCode($code);

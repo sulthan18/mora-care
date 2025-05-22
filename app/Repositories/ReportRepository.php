@@ -5,6 +5,8 @@ namespace App\Repositories;
 use App\Interfaces\ReportRepositoryInterface;
 use App\Models\Report;
 use App\Models\ReportCategory;
+use Auth;
+use Illuminate\Database\Eloquent\Builder;
 
 class ReportRepository implements ReportRepositoryInterface
 {
@@ -16,6 +18,19 @@ class ReportRepository implements ReportRepositoryInterface
     public function getLatestReports()
     {
         return Report::latest()->get()->take(5);
+    }
+    public function getReportsByResidentId(string $status)
+    {
+        return Report::where('resident_id', Auth::user()->resident->id)
+            ->whereHas('reportStatuses', function (Builder $query) use ($status) {
+                $query->where('status', $status)
+                    ->whereIn('id', function ($subQuery) {
+                        $subQuery->selectRaw('MAX(id)')
+                            ->from('report_statuses')
+                            ->groupBy('report_id');
+                    });
+            })
+            ->get();
     }
 
     public function getReportById(int $id)
