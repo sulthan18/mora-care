@@ -10,7 +10,7 @@
         <p class="text-center mb-4">Kamu bisa melihat laporan yang dibuat di halaman laporan</p>
 
 
-        <a href="my-reports.html" class="btn btn-primary py-2 px-4">
+        <a href="{{ route('report.myReport', ['status' => 'delivered']) }}" class="btn btn-primary py-2 px-4">
             Lihat Laporan
         </a>
     </div>
@@ -24,7 +24,7 @@
             renderer: 'svg',
             loop: true,
             autoplay: true,
-            path: '{{asset('assets/app/lottie/success.json')}}'
+            path: '{{ asset('assets/app/lottie/success.json') }}'
         })
     </script>
 @endsection

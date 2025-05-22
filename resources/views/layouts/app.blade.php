@@ -24,6 +24,8 @@
         integrity="sha384-YvpcRf0tY3LHB60NNkmXc5s9fDVZLEsAA55NDz0xhy9GkcIdsK1eN7N6jIeHz"
         crossorigin="anonymous">
     </script>
+
+    @yield('scripts')
 </body>
 
 </html>

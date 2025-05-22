@@ -10,7 +10,7 @@
         Beranda
     </a>
 
-    <a href="my-reports.html">
+    <a href="{{ route('report.myReport') }}">
         <i class="fas fa-solid fa-clipboard-list"></i>
         Laporanmu
     </a>
