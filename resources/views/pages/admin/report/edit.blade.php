@@ -31,7 +31,7 @@
                         class="form-control @error('resident_id') is-invalid @enderror">
                         @foreach ($residents as $resident)
                             <option value="{{ $resident->id }}" @if (old('resident_id', $report->resident_id) == $resident->id) selected @endif>
-                                {{ $resident->user->email }} - {{ $resident->user->name }}
+                                {{ $resident->user?->email ?? 'User hilang' }} - {{ $resident->user?->name ?? '-' }}
                             </option>
                         @endforeach
                     </select>

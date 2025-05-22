@@ -22,8 +22,8 @@
                         @foreach ($residents as $resident)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $resident->user->email }}</td>
-                                <td>{{ $resident->user->name }}</td>
+                                <td>{{ $resident->user?->email ?? '-' }}</td>
+                                <td>{{ $resident->user?->name ?? '-' }}</td>
                                 <td>
                                     <img src="{{ asset('storage/' . $resident->avatar) }}" alt="avatar" width="100">
                                 </td>
