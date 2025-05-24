@@ -10,23 +10,24 @@
         Beranda
     </a>
 
-    <a href="{{ route('report.myReport') }}">
+    <a href="{{ route('report.myReport') }}" class="{{ request()->is('my-report') ? 'active' : '' }}">
         <i class="fas fa-solid fa-clipboard-list"></i>
         Laporanmu
     </a>
 
+
     <div></div>
     <div></div>
     <div></div>
     <div></div>
 
-    <a href="#">
+    <a href="#" class="">
         <i class="fas fa-bell"></i>
         Notifikasi
     </a>
 
     @auth
-        <a href="{{ route('profile') }}">
+        <a href="{{ route('profile') }}" class="{{ request()->is('profile') ? 'active' : '' }}">
             <i class="fas fa-user"></i>
             Profil
         </a>
