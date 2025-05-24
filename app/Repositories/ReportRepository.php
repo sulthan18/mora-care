@@ -14,11 +14,22 @@ class ReportRepository implements ReportRepositoryInterface
     {
         return Report::all();
     }
+    // get All user
+    // public function getLatestReports()
+    // {
+    //     return Report::latest()->get()->take(5);
+    // }
 
+    // filter by user login
     public function getLatestReports()
     {
-        return Report::latest()->get()->take(5);
+        return Report::with('reportStatuses')
+            ->where('resident_id', auth()->user()->resident->id)
+            ->latest()
+            ->take(5)
+            ->get();
     }
+
     public function getReportsByResidentId(string $status)
     {
         return Report::where('resident_id', Auth::user()->resident->id)
