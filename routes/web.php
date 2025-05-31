@@ -44,7 +44,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
 
     Route::resource('/resident', ResidentController::class);
     Route::resource('/report-category', ReportCategoryController::class);
-    Route::resource('/report', AdminReportController::class);
+ Route::get('/report/print', [AdminReportController::class, 'print'])->name('report.print');
+Route::resource('/report', AdminReportController::class);
 
     Route::get('/report-status/{reportId}/create', [ReportStatusController::class, 'create'])->name('report-status.create');
     Route::resource('/report-status', ReportStatusController::class)->except('create');

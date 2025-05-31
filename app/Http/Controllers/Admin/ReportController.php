@@ -8,6 +8,8 @@ use App\Http\Requests\UpdateReportRequest;
 use App\Interfaces\ReportCategoryRepositoryInterface;
 use App\Interfaces\ReportRepositoryInterface;
 use App\Interfaces\ResidentRepositoryInterface;
+use App\Models\Report;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert as Swal;
 
@@ -44,6 +46,14 @@ class ReportController extends Controller
         return view('pages.admin.report.create', compact('residents', 'categories'));
     }
 
+    public function print()
+    {
+        $reports = Report::with(['resident.user', 'reportCategory'])->get();
+        $pdf = Pdf::loadView('pages.admin.report.print', compact('reports'));
+
+        return $pdf->download('laporan-pengaduan.pdf');
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -66,7 +76,7 @@ class ReportController extends Controller
      */
     public function show(string $id)
     {
-        $report = $this->reportRepository->getReportById($id);
+        $report = $this->reportRepository->getReportById((int) $id);
 
         return view('pages.admin.report.show', compact('report'));
     }

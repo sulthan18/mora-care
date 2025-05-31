@@ -23,8 +23,14 @@ class ReportRepository implements ReportRepositoryInterface
     // filter by user login
     public function getLatestReports()
     {
+        $user = auth()->user();
+
+        if (!$user || !$user->resident) {
+            return collect();
+        }
+
         return Report::with('reportStatuses')
-            ->where('resident_id', auth()->user()->resident->id)
+            ->where('resident_id', $user->resident->id)
             ->latest()
             ->take(5)
             ->get();
@@ -46,7 +52,7 @@ class ReportRepository implements ReportRepositoryInterface
 
     public function getReportById(int $id)
     {
-        return Report::where('id', $id)->first();
+       return Report::with(['resident.user', 'reportCategory'])->findOrFail($id);
     }
 
     public function getReportByCode(string $code)
