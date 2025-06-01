@@ -2,7 +2,10 @@
 
 @section('title', 'Data Laporan')
 @section('content')
-    <a href="{{ route('admin.report.create') }}" class="btn btn-primary mb-3">Tambah Data</a>
+    <div class="mb-3 d-flex justify-content-between align-items-center">
+        <a href="{{ route('admin.report.create') }}" class="btn btn-primary">Tambah Data</a>
+        <a href="{{ route('admin.report.print') }}" class="btn btn-success">Cetak Laporan</a>
+    </div>
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">

@@ -54,14 +54,14 @@
                 </div>
                 <i class="fa-solid fa-chevron-right"></i>
             </a>
-            <a href="#"
+            {{-- <a href="#"
                 class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center gap-3">
                     <i class="fa-solid fa-print"></i>
                     <p class="fw-light">Cetak Laporan</p>
                 </div>
                 <i class="fa-solid fa-chevron-right"></i>
-            </a>
+            </a> --}}
         </div>
 
         <div class="mt-4">
