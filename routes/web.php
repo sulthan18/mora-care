@@ -28,6 +28,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/my-report', [UserReportController::class, 'myReport'])->name('report.myReport');
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::get('/profile/settings', [ProfileController::class, 'settings'])->name('profile.settings');
+    Route::put('/profile/settings', [ProfileController::class, 'updateSettings'])->name('profile.updateSettings');
+
+    // Password Routes
+    Route::get('/profile/password', [ProfileController::class, 'password'])->name('profile.password');
+    Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');
 });
 
 // Auth Routes
@@ -44,8 +50,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
 
     Route::resource('/resident', ResidentController::class);
     Route::resource('/report-category', ReportCategoryController::class);
- Route::get('/report/print', [AdminReportController::class, 'print'])->name('report.print');
-Route::resource('/report', AdminReportController::class);
+    Route::get('/report/print', [AdminReportController::class, 'print'])->name('report.print');
+    Route::resource('/report', AdminReportController::class);
 
     Route::get('/report-status/{reportId}/create', [ReportStatusController::class, 'create'])->name('report-status.create');
     Route::resource('/report-status', ReportStatusController::class)->except('create');

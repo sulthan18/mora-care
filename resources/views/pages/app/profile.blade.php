@@ -4,8 +4,8 @@
 
 @section('content')
     <div class="d-flex flex-column justify-content-center align-items-center gap-2">
-        <img src="{{ asset('storage/' . Auth::user()->resident->avatar) }}" alt="avatar" class="avatar">
-        <h5>{{ Auth::user()->name }}</h5>
+        <img src="{{ asset('storage/' . auth()->user()->resident->avatar) }}" alt="avatar" class="avatar">
+        <h5>{{ auth()->user()->name }}</h5>
     </div>
 
     <div class="row mt-4">
@@ -30,7 +30,7 @@
 
     <div class="mt-4">
         <div class="list-group list-group-flush">
-            <a href="#"
+            <a href="{{ route('profile.settings') }}"
                 class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center gap-3">
                     <i class="fa-solid fa-user"></i>
@@ -38,7 +38,7 @@
                 </div>
                 <i class="fa-solid fa-chevron-right"></i>
             </a>
-            <a href="#"
+            <a href="{{ route('profile.password') }}"
                 class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center gap-3">
                     <i class="fa-solid fa-lock"></i>
