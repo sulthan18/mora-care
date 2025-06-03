@@ -117,4 +117,8 @@ class ProfileController extends Controller
         return redirect()->route('profile.password')
             ->with('success', 'Password berhasil diubah');
     }
+
+    public function help(){
+        return view('user.profile.help');
+    }
 }

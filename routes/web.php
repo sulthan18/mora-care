@@ -31,9 +31,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/settings', [ProfileController::class, 'settings'])->name('profile.settings');
     Route::put('/profile/settings', [ProfileController::class, 'updateSettings'])->name('profile.updateSettings');
 
-    // Password Routes
     Route::get('/profile/password', [ProfileController::class, 'password'])->name('profile.password');
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');
+
+    Route::get('/profile/help', [ProfileController::class, 'help'])->name('profile.help');
 });
 
 // Auth Routes
