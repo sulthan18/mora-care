@@ -24,10 +24,6 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex align-items-center mb-3">
-                <div class=" border-primary rounded p-2 d-inline-block me-3">
-                    <i class="fa-solid fa-lock text-primary fa-lg"></i>
-                </div>
-
                 <div>
                     <h6 class="mb-1">Keamanan Akun</h6>
                     <small class="text-muted">Pastikan kata sandi Anda kuat dan mudah diingat</small>
