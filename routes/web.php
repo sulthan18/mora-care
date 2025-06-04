@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\ReportController;
+use App\Http\Controllers\User\UserNotificationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ReportCategoryController;
@@ -26,6 +27,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/create-report', [UserReportController::class, 'store'])->name('report.store');
     Route::get('/report-success', [UserReportController::class, 'success'])->name('report.success');
     Route::get('/my-report', [UserReportController::class, 'myReport'])->name('report.myReport');
+
+    Route::get('/notifications', [UserNotificationController::class, 'index'])->name('notifications');
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::get('/profile/settings', [ProfileController::class, 'settings'])->name('profile.settings');

@@ -7,6 +7,7 @@ use App\Http\Requests\StoreReportStatusRequest;
 use App\Http\Requests\UpdateReportStatusRequest;
 use App\Interfaces\ReportRepositoryInterface;
 use App\Interfaces\ReportStatusRepositoryInterface;
+use App\Notifications\ReportStatusUpdated;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert as Swal;
 
@@ -20,17 +21,12 @@ class ReportStatusController extends Controller
         $this->reportStatusRepository = $reportStatusRepository;
         $this->reportRepository = $reportRepository;
     }
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create($reportId)
     {
         $report = $this->reportRepository->getReportById($reportId);
@@ -38,9 +34,6 @@ class ReportStatusController extends Controller
         return view('pages.admin.report-status.create', compact('report'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreReportStatusRequest $request)
     {
         $data = $request->validated();
@@ -49,24 +42,25 @@ class ReportStatusController extends Controller
             $data['image'] = $request->file('image')->store('assets/report-status/image', 'public');
         }
 
-        $this->reportStatusRepository->createReportStatus($data);
+        $reportStatus = $this->reportStatusRepository->createReportStatus($data);
+
+        $reportStatus->load('report.resident.user');
+
+        $user = $reportStatus->report->resident?->user;
+        if ($user) {
+            $user->notify(new ReportStatusUpdated($reportStatus));
+        }
 
         Swal::toast('Data Progress Laporan Berhasil Ditambahkan', 'success')->timerProgressBar();
 
         return redirect()->route('admin.report.show', $request->report_id);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $status = $this->reportStatusRepository->getReportStatusById($id);
@@ -74,9 +68,6 @@ class ReportStatusController extends Controller
         return view('pages.admin.report-status.edit', compact('status'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateReportStatusRequest $request, string $id)
     {
         $data = $request->validated();
@@ -87,14 +78,19 @@ class ReportStatusController extends Controller
 
         $this->reportStatusRepository->updateReportStatus($data, $id);
 
+        $reportStatus = $this->reportStatusRepository->getReportStatusById($id);
+        $reportStatus->load('report.resident.user');
+
+        $user = $reportStatus->report->resident?->user;
+        if ($user) {
+            $user->notify(new ReportStatusUpdated($reportStatus));
+        }
+
         Swal::toast('Data Progress Laporan Berhasil Diupdate', 'success')->timerProgressBar();
 
         return redirect()->route('admin.report.show', $request->report_id);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $status = $this->reportStatusRepository->getReportStatusById($id);

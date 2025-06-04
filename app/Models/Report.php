@@ -34,4 +34,9 @@ class Report extends Model
     {
         return $this->hasMany(ReportStatus::class);
     }
+
+    public function user()
+    {
+        return $this->resident?->user();
+    }
 }

@@ -21,7 +21,7 @@
     <div></div>
     <div></div>
 
-    <a href="#" class="">
+    <a href="{{ route('notifications') }}" class="{{ request()->is('notifications') ? 'active' : '' }}">
         <i class="fas fa-bell"></i>
         Notifikasi
     </a>
