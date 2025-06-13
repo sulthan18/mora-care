@@ -1,10 +1,10 @@
 # 🏘️ Moracare - Reporting System
 
-Laravel-based platform enabling residents to submit local issues and administrators to manage/track report progress efficiently.
+Laravel-based platform enabling users to submit local issues and administrators to manage/track report progress efficiently.
 
 ## 🌟 Key Features
 
-### 👤 Resident Features
+### 👤 User Features
 | Feature                  | Description                                                                 |
 |--------------------------|-----------------------------------------------------------------------------|
 | 🔐 **User Authentication** | Secure registration/login with email verification                           |
@@ -19,7 +19,7 @@ Laravel-based platform enabling residents to submit local issues and administrat
 | Feature                     | Description                                                               |
 |-----------------------------|---------------------------------------------------------------------------|
 | 📊 **Analytics Dashboard**  | Visual reports and statistics (by status/category/timeframe)             |
-| 👥 **Resident Management**  | CRUD operations for user accounts                                         |
+| 👥 **User Management**  | CRUD operations for user accounts                                         |
 | 🏷️ **Category Management** | Create/edit report categories with custom icons                          |
 | 📋 **Report Workflow**      | Full lifecycle management (priority assignment/status updates/comments)  |
 | 📸 **Progress Documentation**| Upload images/updates at each status change                              |
