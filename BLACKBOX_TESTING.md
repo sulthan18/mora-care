@@ -1,6 +1,6 @@
 # Blackbox Testing - Alur Pengguna (End-to-End)
 
-Berikut adalah tabel pengujian blackbox untuk alur lengkap penggunaan aplikasi, mulai dari registrasi hingga logout.
+Berikut adalah tabel pengujian blackbox untuk alur lengkap penggunaan aplikasi oleh **Pengguna Biasa**, mulai dari registrasi hingga logout.
 
 | No | Pengujian | Test Case | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
 |----|-----------|-----------|-----------------------|-----------------|------------|
@@ -15,3 +15,22 @@ Berikut adalah tabel pengujian blackbox untuk alur lengkap penggunaan aplikasi, 
 | 9 | Edit Laporan | Mengubah isi laporan yang sudah ada dan menyimpannya | Perubahan tersimpan di database dan tampilan laporan terupdate | Berhasil (Update data sukses) | Valid |
 | 10 | Hapus Laporan | Menekan tombol "Hapus" pada salah satu laporan dan mengonfirmasi alert konfirmasi | Laporan terhapus dari database dan hilang dari daftar tampilan | Berhasil (Data terhapus) | Valid |
 | 11 | Logout | Mengklik tombol/link "Logout" pada navigasi | Sesi pengguna berakhir dan diarahkan kembali ke halaman depan atau login | Berhasil (Sesi destroyed, redirect ke home) | Valid |
+
+<br>
+
+# Blackbox Testing - Alur Admin (End-to-End)
+
+Berikut adalah tabel pengujian blackbox untuk alur lengkap penggunaan aplikasi oleh **Administrator**, mulai dari login hingga monitoring dan logout.
+
+| No | Pengujian | Test Case | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+|----|-----------|-----------|-----------------------|-----------------|------------|
+| 1 | Login Admin | Memasukkan email dan password akun dengan role Admin pada halaman `/login` | Sistem mendeteksi role Admin dan mengarahkan ke Dashboard khusus Admin | Berhasil (Login sukses, masuk dashboard admin) | Valid |
+| 2 | Dashboard & Monitoring | Mengakses halaman Dashboard Admin | Menampilkan statistik ringkasan (Total Laporan, Laporan Pending, Selesai) dan grafik monitoring | Berhasil (Statistik & grafik tampil) | Valid |
+| 3 | Melihat Semua Laporan | Mengakses menu "Kelola Laporan" | Menampilkan daftar seluruh laporan dari semua pengguna dengan filter status | Berhasil (Semua laporan tampil) | Valid |
+| 4 | Cek Detail Laporan Masuk | Mengklik salah satu laporan berstatus "Pending" | Halaman detail menampilkan isi laporan, bukti foto, dan identitas pelapor | Berhasil (Detail laporan tampil lengkap) | Valid |
+| 5 | Verifikasi/Ubah Status (Proses) | Mengubah status laporan dari "Pending" menjadi "Sedang Diproses" | Status laporan terupdate di database dan notifikasi terkirim ke pelapor | Berhasil (Status berubah jadi Proses) | Valid |
+| 6 | Menolak Laporan (Opsional) | Mengubah status laporan menjadi "Ditolak" dengan menyertakan alasan penolakan | Status terupdate menjadi Ditolak dan alasan tersimpan | Berhasil (Laporan ditolak dengan alasan) | Valid |
+| 7 | Menyelesaikan Laporan | Mengubah status laporan dari "Sedang Diproses" menjadi "Selesai" dan menambahkan tanggapan/balasan | Laporan ditandai selesai, tanggapan admin tersimpan, dan status final terupdate | Berhasil (Status Done, tanggapan tersimpan) | Valid |
+| 8 | Hapus Laporan (Admin) | Menghapus laporan yang melanggar aturan dari sistem | Data laporan dihapus permanen dari sistem | Berhasil (Laporan terhapus) | Valid |
+| 9 | Kelola Pengguna (Monitoring) | Mengakses menu "Kelola Pengguna" untuk melihat daftar user terdaftar | Menampilkan daftar pengguna beserta status akun (Aktif/Banned) | Berhasil (List user tampil) | Valid |
+| 10 | Logout Admin | Mengklik tombol "Logout" pada dashboard admin | Sesi admin berakhir dan diarahkan kembali ke halaman login | Berhasil (Sesi destroyed, redirect login) | Valid |
